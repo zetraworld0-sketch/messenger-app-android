@@ -11,7 +11,17 @@
         android:id="@+id/register_new_profile_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="0dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <!-- Added a Toolbar to maintain brand authority during registration -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/registration_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Create Netscape Identity"
+            app:titleTextColor="@color/white"
+            android:background="@color/myPrimaryColor" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -20,6 +30,8 @@
         android:id="@+id/register_new_profile_fragment_place"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        
+        <!-- Fragments for phone and profile will be injected here -->
+        
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
