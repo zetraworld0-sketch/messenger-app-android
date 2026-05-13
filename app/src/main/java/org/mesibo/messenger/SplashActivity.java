@@ -10,18 +10,18 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // This will link to the layout we create in the next step
-        setContentView(R.layout.activity_splash); 
+        setContentView(R.layout.activity_splash);
 
+        // 2-second delay to show the "Sovereign Hub" brand
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Logic: If no token, go to Custom Login. Otherwise, go to Main.
+                // Check if user is already authenticated
                 if (Mesibo.getInstance().getAccessToken() == null) {
+                    // Navigate to Zetra Lab Custom Login
                     startActivity(new Intent(SplashActivity.this, CustomLoginActivity.class));
                 } else {
-                    // This points to your main hub dashboard
+                    // Navigate to Main Dashboard
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
                 finish();
