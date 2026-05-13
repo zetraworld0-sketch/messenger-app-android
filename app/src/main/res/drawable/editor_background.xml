@@ -2,11 +2,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <!--apply button background transparent, full opacity-->
-            <solid android:color="#ffffffff"/>
-            <!--make button border solid color, nontransparent-->
-            <stroke android:color="@color/grey" android:width="0.7dp"/>
-            <corners android:radius="10dp"/>
+            <!-- Solid background -->
+            <solid android:color="@color/white"/>
+            <!-- Border matches the new Powerhouse Blue -->
+            <stroke android:color="@color/colorPrimary" android:width="1.5dp"/>
+            <!-- Professional rounded corners -->
+            <corners android:radius="8dp"/>
         </shape>
     </item>
 </selector>
