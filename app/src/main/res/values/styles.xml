@@ -1,71 +1,28 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.mesibo.messenger">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowDisablePreview">true</item>
-    </style>
+    <application
+        android:name=".MainApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Netscape Sovereign Hub"
+        android:theme="@style/AppTheme">
 
-    <style name="EditProfileTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/myPrimaryColor</item>
-        <item name="colorPrimaryDark">@color/myPrimaryDarkColor</item>
-        <item name="colorAccent">@color/myAccentColor</item>
-        <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:fitsSystemWindows">false</item>
-    </style>
+        <!-- STEP 1: Your New Entry Point -->
+        <activity 
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <style name="ShowUserProfileTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/myPrimaryColor</item>
-        <item name="colorPrimaryDark">@color/myPrimaryDarkColor</item>
-        <item name="colorAccent">@color/myAccentColor</item>
-        <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:fitsSystemWindows">false</item>
-    </style>
+        <!-- STEP 2: Your Custom Login -->
+        <activity android:name=".CustomLoginActivity" />
 
-    <style name="SettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/myPrimaryColor</item>
-        <item name="colorPrimaryDark">@color/myPrimaryDarkColor</item>
-        <item name="colorAccent">@color/myAccentColor</item>
-        <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-    </style>
+        <!-- STEP 3: Disable Default Mesibo Startup -->
+        <activity android:name=".StartUpActivity" android:exported="false" />
 
-    <!-- ZETRA HUB CUSTOM STYLES -->
-    
-    <!-- This style makes the profile image a perfect circle -->
-    <style name="CircleImageStyle">
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <!-- [All your <declare-styleable> and Preference styles remain here unchanged] -->
-    
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <!-- Rest of your Preference and v7 styles... -->
-    <style name="PreferenceThemeOverlay">
-        <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>
-        <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment</item>
-        <item name="preferenceCategoryStyle">@style/Preference.Category</item>
-        <item name="preferenceStyle">@style/Preference</item>
-        <item name="preferenceInformationStyle">@style/Preference.Information</item>
-        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference</item>
-        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat</item>
-        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference</item>
-        <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference</item>
-        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>
-    </style>
-
-</resources>
+    </application>
+</manifest>
