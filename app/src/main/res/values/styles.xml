@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.mesibo.messenger">
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 
-    <application
-        android:name=".MainApplication"
-        android:icon="@mipmap/ic_launcher"
-        android:label="Netscape Sovereign Hub"
-        android:theme="@style/AppTheme">
-
-        <!-- STEP 1: Your New Entry Point -->
-        <activity 
-            android:name=".SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- STEP 2: Your Custom Login -->
-        <activity android:name=".CustomLoginActivity" />
-
-        <!-- STEP 3: Disable Default Mesibo Startup -->
-        <activity android:name=".StartUpActivity" android:exported="false" />
-
-    </application>
-</manifest>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+</resources>
