@@ -2,24 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/window_background">
+    android:background="#000000">
 
-    <!-- Your Hub Logo -->
-    <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_centerIn center="true"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splash_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Netscape Sovereign Hub"
-        android:textColor="@color/myTextPrimaryColor"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/brand_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NETSCAPE"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SOVEREIGN HUB"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
+            android:letterSpacing="0.3"
+            android:layout_marginTop="4dp" />
+            
+    </LinearLayout>
 </RelativeLayout>
