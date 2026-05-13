@@ -10,12 +10,10 @@ android {
     compileSdkVersion project.Mesibo_compileSdkVersion
 
     defaultConfig {
-        // TEMPORARY: Reverted to match google-services.json for baseline verification
+        // Your established application ID for Netscape Sovereign Hub
         applicationId "org.mesibo.messenger" 
         
-        // Fix for the manifest merger error
         minSdkVersion 21
-        
         targetSdkVersion project.Mesibo_targetSdkVersion
         versionCode project.PUBLISH_VERSION_CODE
         versionName project.PUBLISH_VERSION
@@ -50,29 +48,37 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    
+    // Testing logic
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation 'junit:junit:4.12'
 
-    implementation "androidx.appcompat:appcompat:1.0.0"
+    // Core AndroidX UI Components
+    implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.annotation:annotation:1.0.0"
-    implementation "com.google.android.material:material:1.0.0"
-    implementation "androidx.preference:preference:1.0.0"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.preference:preference:1.1.0"
 
+    // Institutional-grade Material Components (Upgraded for Circular Images)
+    implementation "com.google.android.material:material:1.5.0"
+
+    // Google Play Services & Firebase
     implementation "com.google.android.gms:play-services-maps:${project.Mesibo_playServiceVersion}"
     implementation "com.google.android.gms:play-services-location:${project.Mesibo_playServiceVersion}"
     implementation "com.google.android.gms:play-services-places:${project.Mesibo_playServiceVersion}"
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation 'com.google.firebase:firebase-core:16.0.9'
 
+    // Utilities & Productivity Libraries
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
     implementation "com.google.code.gson:gson:${project.Mesibo_gsonVersion}"
 
+    // Mesibo SDK Core Dependencies
     implementation "com.mesibo.api:uihelper:${project.MesiboVersion_UiHelper}"
     implementation "com.mesibo.api:mesibo:${project.MesiboVersion_Api}"
     implementation "com.mesibo.api:ui:${project.MesiboVersion_Ui}"
