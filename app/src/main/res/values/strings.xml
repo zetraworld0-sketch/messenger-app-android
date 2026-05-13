@@ -1,9 +1,26 @@
-<resources tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
 
-    <string name="app_name">Mesibo</string>
-    <string name="menu_conf">Conferencing</string>
-    <string name="menu_calllogs">Call Logs</string>
-    <string name="menu_settings">Settings</string>
+    <!-- Public Facing Identity (Netscape) -->
+    <string name="app_name">Netscape Messaging</string>
+    <string name="messenger_name">Netscape</string>
+    <string name="menu_settings">Netscape Settings</string>
 
+    <!-- Powerhouse Branding (Zetra Lab) -->
+    <string name="welcome_title">Welcome to Netscape</string>
+    <string name="welcome_subtitle">Powered by Zetra Lab Core</string>
+    <string name="login_title">Initialize Netscape Identity</string>
+    <string name="otp_disclaimer">Authenticating with Zetra Sovereign Hub...</string>
+
+    <!-- Menu & Navigation -->
+    <string name="menu_conf">Global Conferencing</string>
+    <string name="menu_calllogs">Communication Logs</string>
+    <string name="menu_invite">Invite to Netscape</string>
+    <string name="menu_about">About Netscape Hub</string>
+
+    <!-- Functionality Overwrites -->
+    <string name="delete_chat">Purge Conversation</string>
+    <string name="clear_chat">Clear Buffer</string>
+    <string name="set_profile_name">Zetra Identity Name</string>
+    <string name="info_status">Sovereign Status</string>
 
 </resources>
