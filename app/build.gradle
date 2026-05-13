@@ -7,14 +7,13 @@ ext {
 }
 
 android {
-    // We maintain JDK 17 compatibility for institutional stability
     compileSdkVersion project.Mesibo_compileSdkVersion
 
     defaultConfig {
-        // Updated to Netscape identity for Zetra Lab
-        applicationId "com.zetra.netscape" 
+        // TEMPORARY: Reverted to match google-services.json for baseline verification
+        applicationId "org.mesibo.messenger" 
         
-        // HARD OVERRIDE: Set to 21 to fix the 'uses-sdk:minSdkVersion 19' error
+        // Fix for the manifest merger error
         minSdkVersion 21
         
         targetSdkVersion project.Mesibo_targetSdkVersion
@@ -28,7 +27,7 @@ android {
 
     lintOptions {
         disable 'MissingTranslation'
-        abortOnError false // Prevents small lint errors from stopping the build
+        abortOnError false 
     }
 
     compileOptions {
@@ -42,7 +41,6 @@ android {
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
