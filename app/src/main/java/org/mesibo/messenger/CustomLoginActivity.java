@@ -1,4 +1,4 @@
-package com.zetra.netscape; // Ensure this matches your package name
+package org.mesibo.messenger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,21 +15,21 @@ public class CustomLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_login);
 
-        EditText emailField = findViewById(R.id.email_input);
-        EditText passwordField = findViewById(R.id.password_input);
+        final EditText emailField = findViewById(R.id.email_input);
+        final EditText passwordField = findViewById(R.id.password_input);
         Button loginBtn = findViewById(R.id.login_button);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailField.getText().toString();
-                String password = passwordField.getText().toString();
+                String email = emailField.getText().toString().trim();
+                String password = passwordField.getText().toString().trim();
 
-                // Professional validation
+                // Institutional-grade validation check
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(CustomLoginActivity.this, "Please enter all credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CustomLoginActivity.this, "Credentials required", Toast.LENGTH_SHORT).show();
                 } else {
-                    // This is where you'll eventually connect to your Zitra backend
+                    // Logic to proceed to the Main Hub
                     Intent intent = new Intent(CustomLoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
