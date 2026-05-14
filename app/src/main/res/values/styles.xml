@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Master Application Theme -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -14,10 +14,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- SplashTheme: The specific resource causing your AAPT error -->
+    <!-- Required for Manifest line 93 -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Required for fragment_register_new_profile.xml -->
+    <style name="CircleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
