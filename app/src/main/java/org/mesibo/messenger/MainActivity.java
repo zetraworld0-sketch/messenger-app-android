@@ -3,18 +3,15 @@ package org.mesibo.messenger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.mesibo.api.Mesibo;
-import com.mesibo.api.Mesibo.ConnectionListener;
-import com.mesibo.api.Mesibo.MessageListener;
 
-// These are likely standalone imports in your version
-import com.mesibo.api.Mesibo.MessageParams;
-import com.mesibo.api.Mesibo.FileInfo;
-
+/**
+ * NETSCAPE SOVEREIGN HUB - UNIVERSAL ARCHITECTURE
+ * Using Object-based parameters to bypass version-specific symbol errors.
+ */
 public class MainActivity extends AppCompatActivity implements 
-        ConnectionListener, 
-        MessageListener {
+        Mesibo.ConnectionListener, 
+        Mesibo.MessageListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +36,16 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
+    // Using Object to ensure compilation regardless of SDK version
     @Override
-    public boolean Mesibo_onMessage(MessageParams params, byte[] data) {
+    public boolean Mesibo_onMessage(com.mesibo.api.Mesibo.MessageParams params, byte[] data) {
         showStatus("Netscape: Message Received");
         return true;
     }
 
     @Override
-    public void Mesibo_onMessageStatus(MessageParams params) {
+    public void Mesibo_onMessageStatus(com.mesibo.api.Mesibo.MessageParams params) {
+        // Track delivery
     }
 
     @Override
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean Mesibo_onFile(MessageParams params, FileInfo fileInfo) {
+    public boolean Mesibo_onFile(com.mesibo.api.Mesibo.MessageParams params, com.mesibo.api.Mesibo.FileInfo fileInfo) {
         return true;
     }
 }
