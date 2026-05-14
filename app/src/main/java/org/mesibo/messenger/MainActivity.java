@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 import com.mesibo.api.Mesibo;
 
-/**
- * NETSCAPE SOVEREIGN HUB - CORE BUILD
- * Using Object-based parameters to bypass SDK version conflicts.
- */
 public class MainActivity extends AppCompatActivity implements 
         Mesibo.ConnectionListener, 
         Mesibo.MessageListener {
@@ -20,9 +16,11 @@ public class MainActivity extends AppCompatActivity implements
 
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
+        
+        // Add the listener to the API
         Mesibo.addListener(this);
         
-        Mesibo.setSecureAndInsecureConnection(true, true);
+        // Start the Mesibo Engine
         Mesibo.start();
     }
 
@@ -35,15 +33,21 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    // BYPASS: Using Object to ensure the build enters successfully
+    // Fix 1: Correct signature for Message Listener
     @Override
-    public boolean Mesibo_onMessage(Object params, byte[] data) {
-        showStatus("Netscape: Hub Online");
+    public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
+        showStatus("Netscape Hub: Message Received");
         return true;
     }
 
+    // Fix 2: Added the missing mandatory method from your error log
     @Override
-    public void Mesibo_onMessageStatus(Object params) {
+    public void Mesibo_onMessageUpdate(Mesibo.MesiboMessage message) {
+        // Required by the SDK version you are using
+    }
+
+    @Override
+    public void Mesibo_onMessageStatus(Mesibo.MessageParams params) {
     }
 
     @Override
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean Mesibo_onFile(Object params, Object fileInfo) {
+    public boolean Mesibo_onFile(Mesibo.MessageParams params, Mesibo.FileInfo fileInfo) {
         return true;
     }
 }
