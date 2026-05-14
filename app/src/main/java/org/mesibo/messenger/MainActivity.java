@@ -5,19 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mesibo.api.Mesibo;
-// IMPORTANT: Adding explicit imports for Mesibo parameters
-import com.mesibo.api.Mesibo.ConnectionListener;
-import com.mesibo.api.Mesibo.MessageListener;
-import com.mesibo.api.Mesibo.MessageParams;
-import com.mesibo.api.Mesibo.FileInfo;
 
 /**
  * NETSCAPE SOVEREIGN HUB - FULL UNIT 1 (MESSAGING)
- * Updated with explicit imports to resolve symbol errors.
+ * Using Direct Pathing to resolve SDK symbol errors.
  */
 public class MainActivity extends AppCompatActivity implements 
-        ConnectionListener, 
-        MessageListener {
+        Mesibo.ConnectionListener, 
+        Mesibo.MessageListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +40,10 @@ public class MainActivity extends AppCompatActivity implements
     // --- MESSAGING NET LOGIC ---
     
     @Override
-    public boolean Mesibo_onMessage(MessageParams params, byte[] data) {
+    public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
         try {
             String messageContent = new String(data, "UTF-8");
-            showStatus("Netscape Message: " + messageContent);
+            showStatus("Netscape Message Received");
         } catch (Exception e) {
             return false;
         }
@@ -56,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void Mesibo_onMessageStatus(MessageParams params) {
-        // Tracks delivery/read status in the ecosystem
+    public void Mesibo_onMessageStatus(Mesibo.MessageParams params) {
+        // Verification for the Zetra ecosystem
     }
 
     // --- CONNECTION LOGIC ---
@@ -66,14 +61,11 @@ public class MainActivity extends AppCompatActivity implements
     public void Mesibo_onConnectionStatus(int status) {
         if (status == Mesibo.STATUS_ONLINE) {
             showStatus("Sovereign Hub Online");
-        } else if (status == Mesibo.STATUS_AUTHFAIL) {
-            showStatus("Zetra ID Auth Failed");
         }
     }
 
     @Override
-    public boolean Mesibo_onFile(MessageParams params, FileInfo fileInfo) {
-        showStatus("Incoming File Net: " + fileInfo.getFileName());
+    public boolean Mesibo_onFile(Mesibo.MessageParams params, Mesibo.FileInfo fileInfo) {
         return true;
     }
 }
