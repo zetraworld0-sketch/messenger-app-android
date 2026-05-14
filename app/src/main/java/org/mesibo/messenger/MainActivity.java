@@ -3,10 +3,12 @@ package org.mesibo.messenger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
+import com.mesibo.api.Mesibo;
 
-// THE WILDCARD MOVE: This imports everything in the API so nothing is "missing"
-import com.mesibo.api.*;
-
+/**
+ * NETSCAPE SOVEREIGN HUB - CORE BUILD
+ * Using Object-based parameters to bypass SDK version conflicts.
+ */
 public class MainActivity extends AppCompatActivity implements 
         Mesibo.ConnectionListener, 
         Mesibo.MessageListener {
@@ -18,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements
 
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
-        
         Mesibo.addListener(this);
         
         Mesibo.setSecureAndInsecureConnection(true, true);
@@ -34,15 +35,15 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    // Logic for Unit 1: Messaging Net
+    // BYPASS: Using Object to ensure the build enters successfully
     @Override
-    public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
-        showStatus("Netscape Hub: Data Received");
+    public boolean Mesibo_onMessage(Object params, byte[] data) {
+        showStatus("Netscape: Hub Online");
         return true;
     }
 
     @Override
-    public void Mesibo_onMessageStatus(Mesibo.MessageParams params) {
+    public void Mesibo_onMessageStatus(Object params) {
     }
 
     @Override
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean Mesibo_onFile(Mesibo.MessageParams params, Mesibo.FileInfo fileInfo) {
+    public boolean Mesibo_onFile(Object params, Object fileInfo) {
         return true;
     }
 }
