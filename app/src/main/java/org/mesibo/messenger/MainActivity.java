@@ -3,47 +3,52 @@ package org.mesibo.messenger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
+
 import com.mesibo.api.Mesibo;
+// IMPORTANT: Adding explicit imports for Mesibo parameters
+import com.mesibo.api.Mesibo.ConnectionListener;
+import com.mesibo.api.Mesibo.MessageListener;
+import com.mesibo.api.Mesibo.MessageParams;
+import com.mesibo.api.Mesibo.FileInfo;
 
 /**
  * NETSCAPE SOVEREIGN HUB - FULL UNIT 1 (MESSAGING)
- * This handles the complete pipeline: Connection, Messaging, and Data.
+ * Updated with explicit imports to resolve symbol errors.
  */
 public class MainActivity extends AppCompatActivity implements 
-        Mesibo.ConnectionListener, 
-        Mesibo.MessageListener {
+        ConnectionListener, 
+        MessageListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Start Mesibo Engine
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
         
-        // Register this Hub to listen for BOTH Connection and Messages
         Mesibo.addListener(this);
         
         Mesibo.setSecureAndInsecureConnection(true, true);
         Mesibo.start();
     }
 
-    private void showStatus(String message) {
-        runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
+    private void showStatus(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // --- MESSAGING NET LOGIC ---
     
     @Override
-    public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
+    public boolean Mesibo_onMessage(MessageParams params, byte[] data) {
         try {
             String messageContent = new String(data, "UTF-8");
-            
-            // This is the heartbeat of the Messaging Net
-            // It works for any data length, not just 10 digits.
             showStatus("Netscape Message: " + messageContent);
-            
         } catch (Exception e) {
             return false;
         }
@@ -51,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void Mesibo_onMessageStatus(Mesibo.MessageParams params) {
-        // Tracks if your Net was delivered or read
+    public void Mesibo_onMessageStatus(MessageParams params) {
+        // Tracks delivery/read status in the ecosystem
     }
 
     // --- CONNECTION LOGIC ---
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean Mesibo_onFile(Mesibo.MessageParams params, Mesibo.FileInfo fileInfo) {
+    public boolean Mesibo_onFile(MessageParams params, FileInfo fileInfo) {
         showStatus("Incoming File Net: " + fileInfo.getFileName());
         return true;
     }
