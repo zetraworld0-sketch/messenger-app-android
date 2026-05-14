@@ -24,6 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -36,7 +37,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    // Zetra-Grade Stable SDK - Version 2.x
+    // Zetra-Grade Stable SDK
     implementation 'com.mesibo.api:mesibo:2.0.12'
     implementation 'com.mesibo.api:ui:2.0.12'
     implementation 'com.mesibo.api:calls:2.0.12'
