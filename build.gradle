@@ -1,28 +1,77 @@
-//  Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.android.application'
 
-buildscript {
-    repositories {
-        //Note, keep google above jcenter()
-        google()
-        mavenCentral()
+android {
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "org.mesibo.messenger" 
+        minSdkVersion 21
+        targetSdkVersion 34 
+        versionCode 1
+        versionName "1.0.0"
+        
+        buildConfigField "String", "BUILD_VERSION", "\"1.0.0\""
+        buildConfigField "String", "BUILD_TIMESTAMP", "\"${new java.util.Date().toString()}\""
+        
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.3'
-        classpath 'com.google.gms:google-services:4.3.10'
+    lintOptions {
+        disable 'MissingTranslation'
+        abortOnError false 
+    }
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
     }
 }
 
-allprojects {
-    repositories {
-	mavenCentral()
-        google()
-    }
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://mesibo.com/maven' }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    
+    // Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    // AndroidX & Material
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "com.google.android.material:material:1.5.0"
+
+    // Google & Firebase
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation "com.google.firebase:firebase-messaging:18.0.0"
+
+    // Utilities
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation "com.google.code.gson:gson:2.8.6"
+
+    // Mesibo v2 Core - Hardcoded for Absolute Certainty
+    implementation "com.mesibo.api:mesibo:2.3.4"
+    implementation "com.mesibo.api:ui:2.1.25"
+    implementation "com.mesibo.api:uihelper:2.0.75"
+    implementation "com.mesibo.api:callui:2.0.52"
 }
+
+apply plugin: 'com.google.gms.google-services'
