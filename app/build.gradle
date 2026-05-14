@@ -4,7 +4,7 @@ ext {
     PUBLISH_VERSION = "1.0.0"
     PUBLISH_VERSION_CODE = 1
     
-    // Using 2.+ to allow Gradle to find the latest available minor version
+    // Explicitly targeting Mesibo v2+ for institutional stability
     mesibo_api_version = "2.+" 
     mesibo_ui_version = "2.+"
     mesibo_uihelper_version = "2.+"
@@ -12,7 +12,7 @@ ext {
     play_services_version = "17.0.0"
 }
 
-// Add this to ensure the app module knows where to find Mesibo
+// Local repository definition to ensure Mesibo artifacts are found
 repositories {
     google()
     mavenCentral()
@@ -24,6 +24,7 @@ android {
 
     defaultConfig {
         applicationId "org.mesibo.messenger" 
+        
         minSdkVersion 21
         targetSdkVersion 34 
         versionCode project.PUBLISH_VERSION_CODE
@@ -48,10 +49,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -59,29 +63,35 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
+    // Testing dependencies
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
+    // AndroidX & Material UI
     implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.annotation:annotation:1.1.0"
     implementation "androidx.preference:preference:1.1.0"
     implementation "com.google.android.material:material:1.5.0"
 
+    // Google Services
     implementation "com.google.android.gms:play-services-maps:${project.play_services_version}"
     implementation "com.google.android.gms:play-services-location:${project.play_services_version}"
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation 'com.google.firebase:firebase-core:16.0.9'
 
+    // Utilities
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     
+    // Modern Butterknife for AndroidX support
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
     
     implementation "com.google.code.gson:gson:2.8.6"
 
-    // Mesibo Core - The '2.+' ensures it finds the version the Maven repo actually has
+    // Mesibo Core Dependencies (v2.x)
     implementation "com.mesibo.api:mesibo:${project.mesibo_api_version}"
     implementation "com.mesibo.api:ui:${project.mesibo_ui_version}"
     implementation "com.mesibo.api:uihelper:${project.mesibo_uihelper_version}"
