@@ -3,11 +3,16 @@ package org.mesibo.messenger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
+
+// Explicit imports for Mesibo classes to resolve "Symbol Not Found"
 import com.mesibo.api.Mesibo;
+import com.mesibo.api.Mesibo.MessageParams;
+import com.mesibo.api.Mesibo.MesiboMessage;
+import com.mesibo.api.Mesibo.FileInfo;
 
 /**
  * NETSCAPE SOVEREIGN HUB
- * Finalized Institutional-Grade Build
+ * Finalized for SDK Compatibility & Explicit Symbol Resolution
  */
 public class MainActivity extends AppCompatActivity implements 
         Mesibo.ConnectionListener, 
@@ -21,10 +26,10 @@ public class MainActivity extends AppCompatActivity implements
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
         
-        // Register the listener to handle real-time data
+        // Add the listener
         Mesibo.addListener(this);
         
-        // Start the Mesibo Engine
+        // Start the engine
         Mesibo.start();
     }
 
@@ -37,22 +42,22 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    // RESOLUTION FOR ERROR: Mesibo_onMessage signature
+    // Resolves: error: cannot find symbol class MessageParams
     @Override
-    public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
+    public boolean Mesibo_onMessage(MessageParams params, byte[] data) {
         showStatus("Netscape Hub: Message Received");
         return true;
     }
 
-    // RESOLUTION FOR ERROR: Missing Mesibo_onMessageUpdate
-    // This was the "smoking gun" in your log. It must be present.
+    // Resolves: error: cannot find symbol class MesiboMessage
     @Override
-    public void Mesibo_onMessageUpdate(Mesibo.MesiboMessage message) {
-        // Handled by SDK version requirements
+    public void Mesibo_onMessageUpdate(MesiboMessage message) {
+        // Mandatory for this SDK version
     }
 
+    // Resolves: error: cannot find symbol class MessageParams
     @Override
-    public void Mesibo_onMessageStatus(Mesibo.MessageParams params) {
+    public void Mesibo_onMessageStatus(MessageParams params) {
     }
 
     @Override
@@ -62,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    // Resolves: error: cannot find symbol class FileInfo
     @Override
-    public boolean Mesibo_onFile(Mesibo.MessageParams params, Mesibo.FileInfo fileInfo) {
+    public boolean Mesibo_onFile(MessageParams params, FileInfo fileInfo) {
         return true;
     }
 }
