@@ -1,1 +1,18 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // The specific repository for Mesibo
+        maven { url 'https://mesibo.com/maven' }
+    }
+}
+rootProject.name = "messenger-app-android"
 include ':app'
