@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 import com.mesibo.api.Mesibo;
 
+/**
+ * NETSCAPE SOVEREIGN HUB
+ * Finalized Institutional-Grade Build
+ */
 public class MainActivity extends AppCompatActivity implements 
         Mesibo.ConnectionListener, 
         Mesibo.MessageListener {
@@ -17,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
         
-        // Add the listener to the API
+        // Register the listener to handle real-time data
         Mesibo.addListener(this);
         
         // Start the Mesibo Engine
@@ -33,17 +37,18 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    // Fix 1: Correct signature for Message Listener
+    // RESOLUTION FOR ERROR: Mesibo_onMessage signature
     @Override
     public boolean Mesibo_onMessage(Mesibo.MessageParams params, byte[] data) {
         showStatus("Netscape Hub: Message Received");
         return true;
     }
 
-    // Fix 2: Added the missing mandatory method from your error log
+    // RESOLUTION FOR ERROR: Missing Mesibo_onMessageUpdate
+    // This was the "smoking gun" in your log. It must be present.
     @Override
     public void Mesibo_onMessageUpdate(Mesibo.MesiboMessage message) {
-        // Required by the SDK version you are using
+        // Handled by SDK version requirements
     }
 
     @Override
