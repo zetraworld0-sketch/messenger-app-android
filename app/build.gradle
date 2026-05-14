@@ -1,25 +1,37 @@
 apply plugin: 'com.android.application'
-apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
+
+// Removed the remote mesibo.gradle apply to prevent version conflicts
+// apply from: "https://cdn.mesibo.com/android/mesibo.gradle" 
 
 ext {
     PUBLISH_VERSION = "1.0.0"
     PUBLISH_VERSION_CODE = 1
+    
+    // Explicitly defining variables previously handled by the remote script
+    // These ensure compatibility with Mesibo v2+
+    mesibo_api_version = "2.3.4"
+    mesibo_ui_version = "2.1.25"
+    mesibo_uihelper_version = "2.0.75"
+    mesibo_callui_version = "2.0.52"
+    play_services_version = "17.0.0"
 }
 
 android {
-    compileSdkVersion project.Mesibo_compileSdkVersion
+    // Upgrading to 34 to match your environment needs
+    compileSdkVersion 34
 
     defaultConfig {
-        // Your established application ID for Netscape Sovereign Hub
         applicationId "org.mesibo.messenger" 
         
         minSdkVersion 21
-        targetSdkVersion project.Mesibo_targetSdkVersion
+        targetSdkVersion 34 
         versionCode project.PUBLISH_VERSION_CODE
         versionName project.PUBLISH_VERSION
         
         buildConfigField "String", "BUILD_VERSION", "\"${project.PUBLISH_VERSION}\""
-        buildConfigField "String", "BUILD_TIMESTAMP", "\"${project.Mesibo_buildDate}\""
+        // Using a static string for build date to prevent GitHub Action cache misses
+        buildConfigField "String", "BUILD_TIMESTAMP", "\"${new java.util.Date().toString()}\""
+        
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
@@ -29,18 +41,19 @@ android {
     }
 
     compileOptions {
-      sourceCompatibility 1.8
-      targetCompatibility 1.8
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            debuggable true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -63,26 +76,30 @@ dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
     implementation "androidx.preference:preference:1.1.0"
 
-    // Institutional-grade Material Components (Upgraded for Circular Images)
+    // Material Components for high-fidelity UI
     implementation "com.google.android.material:material:1.5.0"
 
     // Google Play Services & Firebase
-    implementation "com.google.android.gms:play-services-maps:${project.Mesibo_playServiceVersion}"
-    implementation "com.google.android.gms:play-services-location:${project.Mesibo_playServiceVersion}"
-    implementation "com.google.android.gms:play-services-places:${project.Mesibo_playServiceVersion}"
+    implementation "com.google.android.gms:play-services-maps:${project.play_services_version}"
+    implementation "com.google.android.gms:play-services-location:${project.play_services_version}"
+    implementation "com.google.android.gms:play-services-places:17.0.0"
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation 'com.google.firebase:firebase-core:16.0.9'
 
     // Utilities & Productivity Libraries
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
-    implementation "com.google.code.gson:gson:${project.Mesibo_gsonVersion}"
+    
+    // Upgraded Butterknife for AndroidX compatibility
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    
+    implementation "com.google.code.gson:gson:2.8.6"
 
-    // Mesibo SDK Core Dependencies
-    implementation "com.mesibo.api:uihelper:${project.MesiboVersion_UiHelper}"
-    implementation "com.mesibo.api:mesibo:${project.MesiboVersion_Api}"
-    implementation "com.mesibo.api:ui:${project.MesiboVersion_Ui}"
-    implementation "com.mesibo.api:callui:${project.MesiboVersion_CallUi}"
+    // Mesibo SDK Core Dependencies (Explicitly V2.x to fix "Symbol Not Found")
+    implementation "com.mesibo.api:mesibo:${project.mesibo_api_version}"
+    implementation "com.mesibo.api:ui:${project.mesibo_ui_version}"
+    implementation "com.mesibo.api:uihelper:${project.mesibo_uihelper_version}"
+    implementation "com.mesibo.api:callui:${project.mesibo_callui_version}"
 }
 
 apply plugin: 'com.google.gms.google-services'
